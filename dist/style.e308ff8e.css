@@ -1,0 +1,112 @@
+body {
+  font: 12px arial, helvetica, sans-serif;
+  min-width: 100% !important;
+}
+
+/* .date {
+  min-width: 100%;
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: auto;
+  grid-column-gap: 100px;
+  justify-content: space-between;
+} */
+
+/* .schedule {
+  min-width: 100%;
+} */
+
+h3 {
+  min-width: 100%;
+  grid-column-start: 1;
+  grid-column-end: end;
+  border-bottom-style: solid;
+  border-bottom-color: silver;
+  border-bottom-width: 0.1px;
+  margin-bottom: 0px;
+  padding-bottom: 10px;
+}
+
+.game {
+  min-width: 100%;
+  border-top-style: solid;
+  border-top-color: silver;
+  border-top-width: 0.1px;
+  /* grid-column-start: 1; */
+  clear: left;
+  clear: right;
+}
+
+.result {
+  margin-top: 10px;
+  clear: right;
+}
+
+.gameDetails {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 2fr 1fr;
+  grid-column-gap: 10px;
+  grid-template-rows: auto;
+  grid-template-areas: "score status broadcast decision content";
+  align-items: stretch;
+  /* display: flex;
+    flex-direction: row;
+    justify-content: flex-start; */
+  margin-bottom: 10px;
+}
+
+.score {
+  grid-area: score;
+  /* max-width: 250px; */
+  /* margin-right: 20px; */
+}
+
+.gameState {
+  grid-area: status;
+  /* margin-right: 20px; */
+}
+
+.broadcast {
+  grid-area: broadcast;
+  /* margin-right: 20px; */
+}
+
+.decision {
+  grid-area: decision;
+}
+
+.loser {
+  flex-wrap: wrap;
+}
+
+.save {
+  flex-wrap: wrap;
+}
+
+.wrap {
+  grid-area: content;
+}
+
+.date {
+  grid-area: date;
+  display: block;
+  /* grid-template-columns: 100vh;
+  grid-template-rows: auto; */
+  min-width: 100%;
+  clear: left;
+  clear: right;
+  /* grid-template-columns: auto;
+  grid-template-rows: auto;
+  justify-content: space-between; */
+}
+
+.schedule {
+  /* display: grid;
+  grid-template-columns: 100vh;
+  grid-template-rows: 50vh;
+  grid-template-areas: "date";
+  grid-column-gap: 10px; */
+}
+
+
+/*# sourceMappingURL=/style.e308ff8e.css.map */

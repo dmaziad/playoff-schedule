@@ -62,9 +62,9 @@ class App extends React.Component {
     } else {
       console.log("state: ", this.state.dates);
       return (
-        <React.Fragment>
+        <div>
           <Schedule dates={this.state.dates} games={this.state.games} />
-        </React.Fragment>
+        </div>
       );
     }
   }
@@ -77,8 +77,11 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <h1>Schedule</h1>
-        {this.renderView()}
+        <span className="app">
+          <h1>Schedule</h1>
+          <br />
+          {this.renderView()}
+        </span>
       </div>
     );
   }

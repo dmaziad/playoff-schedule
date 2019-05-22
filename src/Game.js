@@ -23,9 +23,16 @@ class Game extends React.Component {
     return (
       <div className="game">
         {/* Placeholder */}
-        <span className="result">{this.props.game.seriesStatus.result}</span>
+        <div className="result">
+          {this.props.game.seriesDescription === "Regular Season"
+            ? this.props.game.seriesStatus.shortDescription
+            : this.props.game.seriesDescription +
+              " Gm " +
+              this.props.game.seriesGameNumber}{" "}
+          - {this.props.game.seriesStatus.result}
+        </div>
         <div className="gameDetails">
-          <span>
+          <span className="score">
             {this.props.game.teams.away.team.shortName}{" "}
             {this.props.game.linescore.teams.away.runs} @{" "}
             {this.props.game.teams.home.team.shortName}{" "}
@@ -45,8 +52,12 @@ class Game extends React.Component {
           {this.props.game.status.detailedState === "Final" ? (
             // list winning and losing pitcher if game status is final
             <span className="decision">
-              <span>W: {this.props.game.decisions.winner.initLastName}</span>
-              <span>L: {this.props.game.decisions.loser.initLastName}</span>
+              <span className="winner">
+                W: {this.props.game.decisions.winner.initLastName}
+              </span>{" "}
+              <span className="loser">
+                L: {this.props.game.decisions.loser.initLastName}
+              </span>{" "}
               {this.props.game.decisions.save ? (
                 <span className="save">
                   S: {this.props.game.decisions.save.initLastName}
@@ -67,9 +78,7 @@ class Game extends React.Component {
               }/final/wrap`}
             >
               Wrap
-            </a>
-          </span>
-          <span className="video">
+            </a>{" "}
             <a
               href={`https://www.mlb.com/gameday/${
                 this.props.game.gamePk

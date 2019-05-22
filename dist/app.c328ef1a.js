@@ -32070,11 +32070,13 @@ function (_React$Component) {
     value: function render() {
       return _react.default.createElement("div", {
         className: "game"
-      }, _react.default.createElement("span", {
+      }, _react.default.createElement("div", {
         className: "result"
-      }, this.props.game.seriesStatus.result), _react.default.createElement("div", {
+      }, this.props.game.seriesDescription === "Regular Season" ? this.props.game.seriesStatus.shortDescription : this.props.game.seriesDescription + " Gm " + this.props.game.seriesGameNumber, " ", "- ", this.props.game.seriesStatus.result), _react.default.createElement("div", {
         className: "gameDetails"
-      }, _react.default.createElement("span", null, this.props.game.teams.away.team.shortName, " ", this.props.game.linescore.teams.away.runs, " @", " ", this.props.game.teams.home.team.shortName, " ", this.props.game.linescore.teams.home.runs), this.props.game.status.detailedState === "Final" ? _react.default.createElement("span", {
+      }, _react.default.createElement("span", {
+        className: "score"
+      }, this.props.game.teams.away.team.shortName, " ", this.props.game.linescore.teams.away.runs, " @", " ", this.props.game.teams.home.team.shortName, " ", this.props.game.linescore.teams.home.runs), this.props.game.status.detailedState === "Final" ? _react.default.createElement("span", {
         className: "gameState"
       }, "FINAL") : _react.default.createElement("span", {
         className: "gameState"
@@ -32083,7 +32085,11 @@ function (_React$Component) {
       }, this.state.broadcast ? this.state.broadcast.name : null), this.props.game.status.detailedState === "Final" ? // list winning and losing pitcher if game status is final
       _react.default.createElement("span", {
         className: "decision"
-      }, _react.default.createElement("span", null, "W: ", this.props.game.decisions.winner.initLastName), _react.default.createElement("span", null, "L: ", this.props.game.decisions.loser.initLastName), this.props.game.decisions.save ? _react.default.createElement("span", {
+      }, _react.default.createElement("span", {
+        className: "winner"
+      }, "W: ", this.props.game.decisions.winner.initLastName), " ", _react.default.createElement("span", {
+        className: "loser"
+      }, "L: ", this.props.game.decisions.loser.initLastName), " ", this.props.game.decisions.save ? _react.default.createElement("span", {
         className: "save"
       }, "S: ", this.props.game.decisions.save.initLastName) : null) : // list probable pitchers if game has not yet begun
       _react.default.createElement("span", {
@@ -32092,9 +32098,7 @@ function (_React$Component) {
         className: "wrap"
       }, _react.default.createElement("a", {
         href: "https://www.mlb.com/gameday/".concat(this.props.game.gamePk, "/final/wrap")
-      }, "Wrap")), _react.default.createElement("span", {
-        className: "video"
-      }, _react.default.createElement("a", {
+      }, "Wrap"), " ", _react.default.createElement("a", {
         href: "https://www.mlb.com/gameday/".concat(this.props.game.gamePk, "/final/video")
       }, "Video"))));
     }
@@ -32358,7 +32362,7 @@ function (_React$Component) {
         return _react.default.createElement("div", null, "loading...");
       } else {
         console.log("state: ", this.state.dates);
-        return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement(_Schedule.default, {
+        return _react.default.createElement("div", null, _react.default.createElement(_Schedule.default, {
           dates: this.state.dates,
           games: this.state.games
         }));
@@ -32373,7 +32377,9 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      return _react.default.createElement("div", null, _react.default.createElement("h1", null, "Schedule"), this.renderView());
+      return _react.default.createElement("div", null, _react.default.createElement("span", {
+        className: "app"
+      }, _react.default.createElement("h1", null, "Schedule"), _react.default.createElement("br", null), this.renderView()));
     }
   }]);
 

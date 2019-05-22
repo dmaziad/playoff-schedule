@@ -5,7 +5,7 @@ class GameDate extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      date: moment(this.props.date).format("LL")
+      date: moment(this.props.date).format("ll")
     };
   }
 

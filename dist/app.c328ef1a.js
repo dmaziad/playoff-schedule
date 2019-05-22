@@ -32043,7 +32043,7 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(GameDate).call(this, props));
     _this.state = {
-      date: (0, _moment.default)(_this.props.date).format("LL")
+      date: (0, _moment.default)(_this.props.date).format("ll")
     };
     return _this;
   }

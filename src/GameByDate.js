@@ -1,6 +1,6 @@
 import React from "react";
 
-class Game extends React.Component {
+class GameByDate extends React.Component {
   constructor(props) {
     super(props);
     this.state = { broadcast: { name: "MLB" } };
@@ -22,7 +22,6 @@ class Game extends React.Component {
   render() {
     return (
       <div className="game">
-        {/* Placeholder */}
         <div className="result">
           {this.props.game.seriesDescription === "Regular Season"
             ? this.props.game.seriesStatus.shortDescription
@@ -93,4 +92,4 @@ class Game extends React.Component {
   }
 }
 
-export default Game;
+export default GameByDate;

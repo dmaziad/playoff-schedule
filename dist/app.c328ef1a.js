@@ -31999,7 +31999,7 @@ var global = arguments[3];
 
 })));
 
-},{}],"Game.js":[function(require,module,exports) {
+},{}],"GameByDate.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -32029,17 +32029,17 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-var Game =
+var GameByDate =
 /*#__PURE__*/
 function (_React$Component) {
-  _inherits(Game, _React$Component);
+  _inherits(GameByDate, _React$Component);
 
-  function Game(props) {
+  function GameByDate(props) {
     var _this;
 
-    _classCallCheck(this, Game);
+    _classCallCheck(this, GameByDate);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(Game).call(this, props));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(GameByDate).call(this, props));
     _this.state = {
       broadcast: {
         name: "MLB"
@@ -32049,7 +32049,7 @@ function (_React$Component) {
     return _this;
   }
 
-  _createClass(Game, [{
+  _createClass(GameByDate, [{
     key: "getBroadcast",
     value: function getBroadcast() {
       var broadcast = this.props.game.broadcasts.find(function (el) {
@@ -32104,10 +32104,10 @@ function (_React$Component) {
     }
   }]);
 
-  return Game;
+  return GameByDate;
 }(_react.default.Component);
 
-var _default = Game;
+var _default = GameByDate;
 exports.default = _default;
 },{"react":"../node_modules/react/index.js"}],"GameDate.js":[function(require,module,exports) {
 "use strict";
@@ -32121,7 +32121,7 @@ var _react = _interopRequireDefault(require("react"));
 
 var _moment = _interopRequireDefault(require("moment"));
 
-var _Game = _interopRequireDefault(require("./Game"));
+var _GameByDate = _interopRequireDefault(require("./GameByDate"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -32172,11 +32172,11 @@ function (_React$Component) {
         className: "date",
         key: this.props.date
       }, _react.default.createElement("h3", null, this.state.date), this.props.games.length > 1 ? this.props.games.map(function (game) {
-        return _react.default.createElement(_Game.default, {
+        return _react.default.createElement(_GameByDate.default, {
           game: game,
           key: game.gamePk
         });
-      }) : _react.default.createElement(_Game.default, {
+      }) : _react.default.createElement(_GameByDate.default, {
         game: this.props.games[0],
         key: this.props.games[0].gamePk
       }));
@@ -32188,7 +32188,186 @@ function (_React$Component) {
 
 var _default = GameDate;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","moment":"../node_modules/moment/moment.js","./Game":"Game.js"}],"Schedule.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","moment":"../node_modules/moment/moment.js","./GameByDate":"GameByDate.js"}],"GameByRound.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _moment = _interopRequireDefault(require("moment"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+var GameByRound =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(GameByRound, _React$Component);
+
+  function GameByRound(props) {
+    var _this;
+
+    _classCallCheck(this, GameByRound);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(GameByRound).call(this, props));
+    _this.state = {
+      broadcast: {
+        name: "MLB"
+      }
+    };
+    _this.getBroadcast = _this.getBroadcast.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(GameByRound, [{
+    key: "getBroadcast",
+    value: function getBroadcast() {
+      var broadcast = this.props.game.broadcasts.find(function (el) {
+        return el.type === "TV";
+      });
+      this.setState({
+        broadcast: broadcast
+      });
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      console.log("mouting with props: ", this.props.game);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      // return <div>Hello</div>;
+      return _react.default.createElement("div", {
+        className: "game"
+      }, _react.default.createElement("div", {
+        className: "result"
+      }, this.props.game.seriesDescription === "Regular Season" ? this.props.game.seriesStatus.shortDescription : this.props.game.seriesDescription + " Gm " + this.props.game.seriesGameNumber, " ", "- ", this.props.game.seriesStatus.result), _react.default.createElement("div", {
+        className: "roundGameDetails"
+      }, _react.default.createElement("span", {
+        className: "roundDate"
+      }, (0, _moment.default)(this.props.game.gameDate).format("MMM D")), _react.default.createElement("span", {
+        className: "roundScore"
+      }, this.props.game.teams.away.team.shortName, " ", this.props.game.linescore.teams.away.runs, " @", " ", this.props.game.teams.home.team.shortName, " ", this.props.game.linescore.teams.home.runs), this.props.game.status.detailedState === "Final" ? _react.default.createElement("span", {
+        className: "roundGameState"
+      }, "FINAL") : _react.default.createElement("span", {
+        className: "roundGameState"
+      }, this.props.game.linescore.inningState, " ", this.props.game.linescore.currentInning), _react.default.createElement("span", {
+        className: "roundBroadcast"
+      }, this.state.broadcast ? this.state.broadcast.name : null), this.props.game.status.detailedState === "Final" ? // list winning and losing pitcher if game status is final
+      _react.default.createElement("span", {
+        className: "roundDecision"
+      }, _react.default.createElement("span", {
+        className: "winner"
+      }, "W: ", this.props.game.decisions.winner.initLastName), " ", _react.default.createElement("span", {
+        className: "loser"
+      }, "L: ", this.props.game.decisions.loser.initLastName), " ", this.props.game.decisions.save ? _react.default.createElement("span", {
+        className: "save"
+      }, "S: ", this.props.game.decisions.save.initLastName) : null) : // list probable pitchers if game has not yet begun
+      _react.default.createElement("span", {
+        className: "roundProbablePitchers"
+      }, "A: ", this.props.game.teams.away.probablePitcher.initLastName, " H:", " ", this.props.game.teams.home.probablePitcher.initLastName), _react.default.createElement("span", {
+        className: "roundWrap"
+      }, _react.default.createElement("a", {
+        href: "https://www.mlb.com/gameday/".concat(this.props.game.gamePk, "/final/wrap")
+      }, "Wrap"), " ", _react.default.createElement("a", {
+        href: "https://www.mlb.com/gameday/".concat(this.props.game.gamePk, "/final/video")
+      }, "Video"))));
+    }
+  }]);
+
+  return GameByRound;
+}(_react.default.Component);
+
+var _default = GameByRound;
+exports.default = _default;
+},{"react":"../node_modules/react/index.js","moment":"../node_modules/moment/moment.js"}],"Rounds.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _GameByRound = _interopRequireDefault(require("./GameByRound"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+var Rounds =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(Rounds, _React$Component);
+
+  function Rounds(props) {
+    _classCallCheck(this, Rounds);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(Rounds).call(this, props));
+  }
+
+  _createClass(Rounds, [{
+    key: "render",
+    value: function render() {
+      return _react.default.createElement("div", {
+        className: "round",
+        key: this.props.round.games[0].seriesStatus.shortName
+      }, _react.default.createElement("h3", null, this.props.round.games[0].seriesStatus.shortName), this.props.round.games.length > 1 ? this.props.round.games.map(function (game) {
+        return _react.default.createElement(_GameByRound.default, {
+          game: game,
+          key: game.gamePk
+        });
+      }) : _react.default.createElement(_GameByRound.default, {
+        game: this.props.round.games[0]
+      }));
+    }
+  }]);
+
+  return Rounds;
+}(_react.default.Component);
+
+var _default = Rounds;
+exports.default = _default;
+},{"react":"../node_modules/react/index.js","./GameByRound":"GameByRound.js"}],"Schedule.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -32199,6 +32378,8 @@ exports.default = void 0;
 var _react = _interopRequireDefault(require("react"));
 
 var _GameDate = _interopRequireDefault(require("./GameDate"));
+
+var _Rounds = _interopRequireDefault(require("./Rounds"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -32243,11 +32424,15 @@ function (_React$Component) {
 
       return _react.default.createElement("div", {
         className: "schedule"
-      }, this.props.dates.map(function (date) {
+      }, this.props.view === "byDate" ? this.props.dates.map(function (date) {
         return _react.default.createElement(_GameDate.default, {
           key: date,
           date: date,
           games: _this.props.games[date]
+        });
+      }) : this.props.rounds.map(function (round) {
+        return _react.default.createElement(_Rounds.default, {
+          round: round
         });
       }));
     }
@@ -32258,7 +32443,7 @@ function (_React$Component) {
 
 var _default = Schedule;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","./GameDate":"GameDate.js"}],"app.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","./GameDate":"GameDate.js","./Rounds":"Rounds.js"}],"app.js":[function(require,module,exports) {
 "use strict";
 
 var _react = _interopRequireDefault(require("react"));
@@ -32341,6 +32526,7 @@ function (_React$Component) {
         }
 
         _this2.setState({
+          view: "byDate",
           games: games,
           dates: gameDates
         });
@@ -32349,22 +32535,65 @@ function (_React$Component) {
       });
     }
   }, {
-    key: "getGamesBySeries",
-    value: function getGamesBySeries() {
+    key: "getGamesByRound",
+    value: function getGamesByRound() {
+      var _this3 = this;
+
       _axios.default.get("http://statsapi.mlb.com/api/v1/schedule/postseason/series?sportId=1&season=2018&hydrate=team,broadcasts(all),seriesStatus(useOverride=true),decisions,person,probablePitcher,linescore(matchup)").then(function (response) {
+        var rounds = [];
+        var seriesList = ["NL Tiebreaker", "AL Wild Card", "NL Wild Card", "ALDS", "ALDS", "NLDS", "NLDS", "ALCS", "NLCS", "World Series"];
         console.log(response.data.series);
+
+        for (var i = 0; i < response.data.series.length; i++) {
+          var round = response.data.series[i];
+          var seriesName = round.games[0].seriesStatus.shortName;
+          var index = seriesList.indexOf(seriesName);
+          console.log("index: ", index);
+          seriesList.splice(index, 1, round);
+          console.log("series: ", round);
+          console.log("seriesList: ", seriesList);
+        }
+
+        _this3.setState({
+          rounds: seriesList,
+          view: "byRound"
+        }, function () {
+          console.log("state: ", _this3.state);
+        });
       });
     }
   }, {
     key: "renderView",
     value: function renderView() {
-      if (!this.state.dates) {
+      if (!this.state.view) {
         return _react.default.createElement("div", null, "loading...");
-      } else {
+      } else if (this.state.view === "byDate") {
         console.log("state: ", this.state.dates);
-        return _react.default.createElement("div", null, _react.default.createElement(_Schedule.default, {
+        return _react.default.createElement("div", null, _react.default.createElement("span", {
+          className: "options"
+        }, _react.default.createElement("span", {
+          className: "optionLeft",
+          id: "selected"
+        }, "By Date"), _react.default.createElement("span", {
+          className: "optionRight",
+          id: "unselected"
+        }, "By Round")), _react.default.createElement(_Schedule.default, {
           dates: this.state.dates,
-          games: this.state.games
+          games: this.state.games,
+          view: this.state.view
+        }));
+      } else if (this.state.view === "byRound") {
+        return _react.default.createElement("div", null, _react.default.createElement("span", {
+          className: "options"
+        }, _react.default.createElement("span", {
+          className: "optionLeft",
+          id: "unselected"
+        }, "By Date"), _react.default.createElement("span", {
+          className: "optionRight",
+          id: "selected"
+        }, "By Round")), _react.default.createElement(_Schedule.default, {
+          rounds: this.state.rounds,
+          view: this.state.view
         }));
       }
     }
@@ -32372,7 +32601,7 @@ function (_React$Component) {
     key: "componentDidMount",
     value: function componentDidMount() {
       // default view should display schedule by date
-      this.getGamesByDate();
+      this.getGamesByRound();
     }
   }, {
     key: "render",

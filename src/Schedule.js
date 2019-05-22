@@ -1,5 +1,6 @@
 import React from "react";
 import GameDate from "./GameDate";
+import Rounds from "./Rounds";
 
 class Schedule extends React.Component {
   constructor(props) {
@@ -13,11 +14,19 @@ class Schedule extends React.Component {
   render() {
     return (
       <div className="schedule">
-        {this.props.dates.map(date => {
-          return (
-            <GameDate key={date} date={date} games={this.props.games[date]} />
-          );
-        })}
+        {this.props.view === "byDate"
+          ? this.props.dates.map(date => {
+              return (
+                <GameDate
+                  key={date}
+                  date={date}
+                  games={this.props.games[date]}
+                />
+              );
+            })
+          : this.props.rounds.map(round => {
+              return <Rounds round={round} />;
+            })}
       </div>
     );
   }

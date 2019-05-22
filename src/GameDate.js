@@ -1,6 +1,6 @@
 import React from "react";
 import moment from "moment";
-import Game from "./Game";
+import GameByDate from "./GameByDate";
 
 class GameDate extends React.Component {
   constructor(props) {
@@ -19,10 +19,13 @@ class GameDate extends React.Component {
         <h3>{this.state.date}</h3>
         {this.props.games.length > 1 ? (
           this.props.games.map(game => {
-            return <Game game={game} key={game.gamePk} />;
+            return <GameByDate game={game} key={game.gamePk} />;
           })
         ) : (
-          <Game game={this.props.games[0]} key={this.props.games[0].gamePk} />
+          <GameByDate
+            game={this.props.games[0]}
+            key={this.props.games[0].gamePk}
+          />
         )}
       </div>
     );

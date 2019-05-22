@@ -41,29 +41,80 @@ class App extends React.Component {
             }
           }
         }
-        this.setState({ games: games, dates: gameDates });
+        this.setState({ view: "byDate", games: games, dates: gameDates });
       })
       .catch(err => console.error(err));
   }
 
-  getGamesBySeries() {
+  getGamesByRound() {
     axios
       .get(
         "http://statsapi.mlb.com/api/v1/schedule/postseason/series?sportId=1&season=2018&hydrate=team,broadcasts(all),seriesStatus(useOverride=true),decisions,person,probablePitcher,linescore(matchup)"
       )
       .then(response => {
+        let rounds = [];
+        let seriesList = [
+          "NL Tiebreaker",
+          "AL Wild Card",
+          "NL Wild Card",
+          "ALDS",
+          "ALDS",
+          "NLDS",
+          "NLDS",
+          "ALCS",
+          "NLCS",
+          "World Series"
+        ];
         console.log(response.data.series);
+        for (let i = 0; i < response.data.series.length; i++) {
+          let round = response.data.series[i];
+          let seriesName = round.games[0].seriesStatus.shortName;
+          let index = seriesList.indexOf(seriesName);
+          console.log("index: ", index);
+          seriesList.splice(index, 1, round);
+          console.log("series: ", round);
+          console.log("seriesList: ", seriesList);
+        }
+        this.setState({ rounds: seriesList, view: "byRound" }, () => {
+          console.log("state: ", this.state);
+        });
       });
   }
 
   renderView() {
-    if (!this.state.dates) {
+    if (!this.state.view) {
       return <div>loading...</div>;
-    } else {
+    } else if (this.state.view === "byDate") {
       console.log("state: ", this.state.dates);
       return (
         <div>
-          <Schedule dates={this.state.dates} games={this.state.games} />
+          <span className="options">
+            <span className="optionLeft" id="selected">
+              By Date
+            </span>
+            <span className="optionRight" id="unselected">
+              By Round
+            </span>
+          </span>
+          <Schedule
+            dates={this.state.dates}
+            games={this.state.games}
+            view={this.state.view}
+          />
+        </div>
+      );
+    } else if (this.state.view === "byRound") {
+      return (
+        <div>
+          <span className="options">
+            <span className="optionLeft" id="unselected">
+              By Date
+            </span>
+            <span className="optionRight" id="selected">
+              By Round
+            </span>
+          </span>
+          <Schedule rounds={this.state.rounds} view={this.state.view} />
         </div>
       );
     }
@@ -71,7 +122,7 @@ class App extends React.Component {
 
   componentDidMount() {
     // default view should display schedule by date
-    this.getGamesByDate();
+    this.getGamesByRound();
   }
 
   render() {

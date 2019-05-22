@@ -31999,7 +31999,113 @@ var global = arguments[3];
 
 })));
 
-},{}],"GameDate.js":[function(require,module,exports) {
+},{}],"Game.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+var Game =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(Game, _React$Component);
+
+  function Game(props) {
+    var _this;
+
+    _classCallCheck(this, Game);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Game).call(this, props));
+    _this.state = {
+      broadcast: {
+        name: "MLB"
+      }
+    };
+    _this.getBroadcast = _this.getBroadcast.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(Game, [{
+    key: "getBroadcast",
+    value: function getBroadcast() {
+      var broadcast = this.props.game.broadcasts.find(function (el) {
+        return el.type === "TV";
+      });
+      this.setState({
+        broadcast: broadcast
+      });
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.getBroadcast();
+      console.log("Game props: ", this.props.game);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return _react.default.createElement("div", {
+        className: "game"
+      }, _react.default.createElement("span", {
+        className: "result"
+      }, this.props.game.seriesStatus.result), _react.default.createElement("div", {
+        className: "gameDetails"
+      }, _react.default.createElement("span", null, this.props.game.teams.away.team.shortName, " ", this.props.game.linescore.teams.away.runs, " @", " ", this.props.game.teams.home.team.shortName, " ", this.props.game.linescore.teams.home.runs), this.props.game.status.detailedState === "Final" ? _react.default.createElement("span", {
+        className: "gameState"
+      }, "FINAL") : _react.default.createElement("span", {
+        className: "gameState"
+      }, this.props.game.linescore.inningState, " ", this.props.game.linescore.currentInning), _react.default.createElement("span", {
+        className: "broadcast"
+      }, this.state.broadcast ? this.state.broadcast.name : null), this.props.game.status.detailedState === "Final" ? // list winning and losing pitcher if game status is final
+      _react.default.createElement("span", {
+        className: "decision"
+      }, _react.default.createElement("span", null, "W: ", this.props.game.decisions.winner.initLastName), _react.default.createElement("span", null, "L: ", this.props.game.decisions.loser.initLastName), this.props.game.decisions.save ? _react.default.createElement("span", {
+        className: "save"
+      }, "S: ", this.props.game.decisions.save.initLastName) : null) : // list probable pitchers if game has not yet begun
+      _react.default.createElement("span", {
+        className: "probablePitchers"
+      }, "A: ", this.props.game.teams.away.probablePitcher.initLastName, " H:", " ", this.props.game.teams.home.probablePitcher.initLastName), _react.default.createElement("span", {
+        className: "wrap"
+      }, _react.default.createElement("a", {
+        href: "https://www.mlb.com/gameday/".concat(this.props.game.gamePk, "/final/wrap")
+      }, "Wrap")), _react.default.createElement("span", {
+        className: "video"
+      }, _react.default.createElement("a", {
+        href: "https://www.mlb.com/gameday/".concat(this.props.game.gamePk, "/final/video")
+      }, "Video"))));
+    }
+  }]);
+
+  return Game;
+}(_react.default.Component);
+
+var _default = Game;
+exports.default = _default;
+},{"react":"../node_modules/react/index.js"}],"GameDate.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -32010,6 +32116,8 @@ exports.default = void 0;
 var _react = _interopRequireDefault(require("react"));
 
 var _moment = _interopRequireDefault(require("moment"));
+
+var _Game = _interopRequireDefault(require("./Game"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -32057,8 +32165,17 @@ function (_React$Component) {
     key: "render",
     value: function render() {
       return _react.default.createElement("div", {
-        className: "date"
-      }, _react.default.createElement("h3", null, this.state.date));
+        className: "date",
+        key: this.props.date
+      }, _react.default.createElement("h3", null, this.state.date), this.props.games.length > 1 ? this.props.games.map(function (game) {
+        return _react.default.createElement(_Game.default, {
+          game: game,
+          key: game.gamePk
+        });
+      }) : _react.default.createElement(_Game.default, {
+        game: this.props.games[0],
+        key: this.props.games[0].gamePk
+      }));
     }
   }]);
 
@@ -32067,7 +32184,7 @@ function (_React$Component) {
 
 var _default = GameDate;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","moment":"../node_modules/moment/moment.js"}],"Schedule.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","moment":"../node_modules/moment/moment.js","./Game":"Game.js"}],"Schedule.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -32124,10 +32241,11 @@ function (_React$Component) {
         className: "schedule"
       }, this.props.dates.map(function (date) {
         return _react.default.createElement(_GameDate.default, {
+          key: date,
           date: date,
           games: _this.props.games[date]
         });
-      }), _react.default.createElement("h2", null, this.props.date));
+      }));
     }
   }]);
 

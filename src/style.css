@@ -139,6 +139,7 @@ h3 {
 .options {
   display: flex;
   justify-content: center;
+  color: #666666;
 }
 
 button {
@@ -166,19 +167,19 @@ button {
 }
 
 #selected {
-  background: whitesmoke;
+  background: #ececec;
 }
 
 #selected:hover {
-  background: silver;
+  background: #ececec;
 }
 
 .optionLeft:hover {
-  background-color: silver;
+  background-color: #ececec;
 }
 
 .optionRight:hover {
-  background-color: silver;
+  background-color: #ececec;
 }
 
 img {
@@ -194,12 +195,7 @@ img {
 }
 
 @media (max-width: 1152px) {
-  /* body {
-    font-size: 15px;
-  } */
-
   .gameDetails {
-    /* padding: 10px 0 10px 0; */
     display: grid;
     grid-template-columns: 0.75fr 0.75fr 0.5fr 0.5fr 1fr 1fr;
     grid-column-gap: 10px;
@@ -252,34 +248,6 @@ img {
   }
 }
 
-/* @media (max-width: 908px) {
-  .gameDetails {
-    display: grid;
-    grid-template-columns: 1fr 1fr 0.5fr 0.5fr 1fr 1fr;
-    grid-column-gap: 10px;
-    grid-template-rows: auto;
-    grid-template-areas: "away home status broadcast decision recap";
-    align-items: center;
-    margin-bottom: 10px;
-  }
-
-  .recap {
-    display: block;
-  }
-  .video {
-    display: block;
-  }
-  .wrap {
-    display: block;
-  }
-} */
-
-/* @media (max-width: 870px) {
-  body {
-    font-size: 14px;
-  }
-} */
-
 @media (max-width: 784px) {
   body {
     font-size: 15px;
@@ -308,12 +276,6 @@ img {
     grid-area: score;
   }
 }
-
-/* @media (max-width: 727px) {
-  body {
-    font-size: 13px;
-  }
-} */
 
 @media (max-width: 499px) {
   body {

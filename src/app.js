@@ -89,16 +89,16 @@ class App extends React.Component {
       return (
         <div>
           <span className="options">
-            <span className="optionLeft" id="selected">
+            <button className="optionLeft" id="selected">
               By Date
-            </span>
-            <span
+            </button>
+            <button
               className="optionRight"
               id="unselected"
               onClick={this.getGamesByRound}
             >
               By Round
-            </span>
+            </button>
           </span>
           <Schedule
             dates={this.state.dates}
@@ -111,16 +111,16 @@ class App extends React.Component {
       return (
         <div>
           <span className="options">
-            <span
+            <button
               className="optionLeft"
               id="unselected"
               onClick={this.getGamesByDate}
             >
               By Date
-            </span>
-            <span className="optionRight" id="selected">
+            </button>
+            <button className="optionRight" id="selected">
               By Round
-            </span>
+            </button>
           </span>
           <Schedule rounds={this.state.rounds} view={this.state.view} />
         </div>
@@ -132,9 +132,9 @@ class App extends React.Component {
     return (
       <div>
         <span className="app">
-          <span className="heading">
-            <h2>Schedule</h2>
-          </span>
+          <div className="heading-bar">
+            <span className="heading">Schedule</span>
+          </div>
           <br />
           {this.renderView()}
         </span>

@@ -32041,18 +32041,22 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(GameByDate).call(this, props));
     _this.getBroadcast = _this.getBroadcast.bind(_assertThisInitialized(_this));
+    _this.getWidth = _this.getWidth.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(GameByDate, [{
     key: "componentDidMount",
     value: function componentDidMount() {
+      this.getWidth();
       this.getBroadcast();
+      window.addEventListener("resize", this.getWidth);
     }
   }, {
     key: "getBroadcast",
     value: function getBroadcast() {
-      var broadcast = this.props.game.broadcasts.find(function (el) {
+      var game = this.props.game;
+      var broadcast = game.broadcasts.find(function (el) {
         return el.type === "TV";
       });
       this.setState({
@@ -32060,52 +32064,85 @@ function (_React$Component) {
       });
     }
   }, {
+    key: "getWidth",
+    value: function getWidth() {
+      var windowWidth = document.documentElement.clientWidth;
+      this.setState({
+        width: windowWidth
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
+      var game = this.props.game;
+      var awayTeam = game.teams.away;
+      var homeTeam = game.teams.home;
       return _react.default.createElement("div", {
         className: "game"
       }, _react.default.createElement("div", {
         className: "result"
-      }, this.props.game.seriesDescription === "Regular Season" ? this.props.game.seriesStatus.shortDescription : this.props.game.seriesDescription + " Gm " + this.props.game.seriesGameNumber, " ", "- ", this.props.game.seriesStatus.result), _react.default.createElement("div", {
+      }, game.seriesDescription === "Regular Season" ? game.seriesStatus.shortDescription : game.seriesDescription + " Gm " + game.seriesGameNumber, " ", "- ", game.seriesStatus.result), _react.default.createElement("div", {
         className: "gameDetails"
-      }, _react.default.createElement("span", {
-        className: "score"
+      }, this.state && this.state.width > 784 ? _react.default.createElement("span", {
+        className: "awayTeam"
+      }, _react.default.createElement("a", {
+        href: "https://www.mlb.com/".concat(awayTeam.team.teamName.replace(/\s/g, "").toLowerCase())
       }, _react.default.createElement("img", {
-        src: "https://www.mlbstatic.com/team-logos/".concat(this.props.game.teams.away.team.id, ".svg"),
-        height: "15",
-        width: "15"
-      }), this.props.game.teams.away.team.shortName, " ", this.props.game.linescore.teams.away.runs, " @", " ", _react.default.createElement("img", {
-        src: "https://www.mlbstatic.com/team-logos/".concat(this.props.game.teams.home.team.id, ".svg"),
-        height: "15",
-        width: "15"
-      }), this.props.game.teams.home.team.shortName, " ", this.props.game.linescore.teams.home.runs), this.props.game.status.detailedState === "Final" ? _react.default.createElement("span", {
+        src: "https://www.mlbstatic.com/team-logos/".concat(awayTeam.team.id, ".svg"),
+        height: "20",
+        width: "20"
+      }), awayTeam.team.shortName, " ", game.linescore.teams.away.runs)) : _react.default.createElement("span", {
+        className: "score"
+      }, _react.default.createElement("a", {
+        href: "https://www.mlb.com/".concat(awayTeam.team.teamName.replace(/\s/g, "").toLowerCase())
+      }, awayTeam.team.abbreviation, " ", game.linescore.teams.away.runs), " ", this.state && this.state.width < 500 ? _react.default.createElement("br", null) : null, "@", " ", _react.default.createElement("a", {
+        href: "https://www.mlb.com/".concat(homeTeam.team.teamName.replace(/\s/g, "").toLowerCase())
+      }, homeTeam.team.abbreviation, " ", game.linescore.teams.home.runs)), this.state && this.state.width > 784 ? _react.default.createElement("span", {
+        className: "homeTeam"
+      }, "@", " ", _react.default.createElement("a", {
+        href: "https://www.mlb.com/".concat(homeTeam.team.teamName.replace(/\s/g, "").toLowerCase())
+      }, _react.default.createElement("img", {
+        src: "https://www.mlbstatic.com/team-logos/".concat(homeTeam.team.id, ".svg"),
+        height: "20",
+        width: "20"
+      }), homeTeam.team.shortName, " ", game.linescore.teams.home.runs)) : null, game.status.detailedState === "Final" ? _react.default.createElement("span", {
         className: "gameState"
       }, "FINAL") : _react.default.createElement("span", {
         className: "gameState"
-      }, this.props.game.linescore.inningState, " ", this.props.game.linescore.currentInning), _react.default.createElement("span", {
+      }, game.linescore.inningState, " ", game.linescore.currentInning), _react.default.createElement("span", {
         className: "broadcast"
-      }, this.state && this.state.broadcast ? this.state.broadcast.name : null), this.props.game.status.detailedState === "Final" ? // list winning and losing pitcher if game status is final
+      }, this.state && this.state.broadcast ? this.state.broadcast.name : null), game.status.detailedState === "Final" ? // list winning and losing pitcher if game status is final
       _react.default.createElement("span", {
         className: "decision"
       }, _react.default.createElement("span", {
         className: "winner"
-      }, "W: ", this.props.game.decisions.winner.initLastName), " ", _react.default.createElement("span", {
+      }, "W:", " ", _react.default.createElement("a", {
+        href: "https://www.mlb.com/player/".concat(game.decisions.winner.id, "/").concat(game.decisions.winner.fullName.replace(/\s/g, "-").toLowerCase())
+      }, game.decisions.winner.initLastName)), " ", _react.default.createElement("span", {
         className: "loser"
-      }, "L: ", this.props.game.decisions.loser.initLastName), " ", this.props.game.decisions.save ? _react.default.createElement("span", {
+      }, "L:", " ", _react.default.createElement("a", {
+        href: "https://www.mlb.com/player/".concat(game.decisions.loser.id, "/").concat(game.decisions.loser.fullName.replace(/\s/g, "-").toLowerCase())
+      }, game.decisions.loser.initLastName)), " ", game.decisions.save ? _react.default.createElement("span", {
         className: "save"
-      }, "S: ", this.props.game.decisions.save.initLastName) : null) : // list probable pitchers if game has not yet begun
+      }, "S:", " ", _react.default.createElement("a", {
+        href: "https://www.mlb.com/player/".concat(game.decisions.save.id, "/").concat(game.decisions.save.fullName.replace(/\s/g, "-").toLowerCase())
+      }, game.decisions.save.initLastName)) : null) : // list probable pitchers if game has not yet begun
       _react.default.createElement("span", {
         className: "probablePitchers"
-      }, "A: ", this.props.game.teams.away.probablePitcher.initLastName, " H:", " ", this.props.game.teams.home.probablePitcher.initLastName), _react.default.createElement("span", {
+      }, "A: ", awayTeam.probablePitcher.initLastName, " H:", " ", homeTeam.probablePitcher.initLastName), _react.default.createElement("span", {
+        className: "recap"
+      }, _react.default.createElement("span", {
         className: "wrap"
       }, _react.default.createElement("a", {
-        href: "https://www.mlb.com/gameday/".concat(this.props.game.gamePk, "/final/wrap")
-      }, "Wrap"), " ", _react.default.createElement("a", {
-        href: "https://www.mlb.com/gameday/".concat(this.props.game.gamePk, "/final/video")
+        href: "https://www.mlb.com/gameday/".concat(game.gamePk, "/final/wrap")
+      }, "Wrap"), " "), _react.default.createElement("span", {
+        className: "video"
+      }, _react.default.createElement("a", {
+        href: "https://www.mlb.com/gameday/".concat(game.gamePk, "/final/video")
       }, _react.default.createElement("img", {
         src: "http://mlb.mlb.com/images/icons/mlb_tv.gif",
         alt: "tv"
-      })))));
+      }), " ", this.state && this.state.width > 625 ? "Video" : null)))));
     }
   }]);
 
@@ -32243,7 +32280,8 @@ function (_React$Component) {
   }, {
     key: "getBroadcast",
     value: function getBroadcast() {
-      var broadcast = this.props.game.broadcasts.find(function (el) {
+      var game = this.props.game;
+      var broadcast = game.broadcasts.find(function (el) {
         return el.type === "TV";
       });
       this.setState({
@@ -32253,41 +32291,53 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      var game = this.props.game;
       return _react.default.createElement("div", {
         className: "game"
       }, _react.default.createElement("div", {
         className: "result"
-      }, this.props.game.seriesDescription === "Regular Season" ? this.props.game.seriesStatus.shortDescription : this.props.game.seriesDescription + " Gm " + this.props.game.seriesGameNumber, " ", "- ", this.props.game.seriesStatus.result), _react.default.createElement("div", {
+      }, game.seriesDescription === "Regular Season" ? game.seriesStatus.shortDescription : game.seriesDescription + " Gm " + game.seriesGameNumber, " ", "- ", game.seriesStatus.result), _react.default.createElement("div", {
         className: "roundGameDetails"
       }, _react.default.createElement("span", {
         className: "roundDate"
-      }, (0, _moment.default)(this.props.game.gameDate).format("MMM D")), _react.default.createElement("span", {
+      }, (0, _moment.default)(game.gameDate).format("MMM D")), _react.default.createElement("span", {
         className: "roundScore"
-      }, this.props.game.teams.away.team.shortName, " ", this.props.game.linescore.teams.away.runs, " @", " ", this.props.game.teams.home.team.shortName, " ", this.props.game.linescore.teams.home.runs), this.props.game.status.detailedState === "Final" ? _react.default.createElement("span", {
+      }, _react.default.createElement("img", {
+        src: "https://www.mlbstatic.com/team-logos/".concat(game.teams.away.team.id, ".svg"),
+        height: "20",
+        width: "20"
+      }), game.teams.away.team.shortName, " ", game.linescore.teams.away.runs, " @", " ", _react.default.createElement("img", {
+        src: "https://www.mlbstatic.com/team-logos/".concat(game.teams.home.team.id, ".svg"),
+        height: "20",
+        width: "20"
+      }), game.teams.home.team.shortName, " ", game.linescore.teams.home.runs), game.status.detailedState === "Final" ? _react.default.createElement("span", {
         className: "roundGameState"
       }, "FINAL") : _react.default.createElement("span", {
         className: "roundGameState"
-      }, this.props.game.linescore.inningState, " ", this.props.game.linescore.currentInning), _react.default.createElement("span", {
+      }, game.linescore.inningState, " ", game.linescore.currentInning), _react.default.createElement("span", {
         className: "roundBroadcast"
-      }, this.state && this.state.broadcast ? this.state.broadcast.name : null), this.props.game.status.detailedState === "Final" ? // list winning and losing pitcher if game status is final
+      }, this.state && this.state.broadcast ? this.state.broadcast.name : null), game.status.detailedState === "Final" ? // list winning and losing pitcher if game status is final
       _react.default.createElement("span", {
         className: "roundDecision"
       }, _react.default.createElement("span", {
         className: "winner"
-      }, "W: ", this.props.game.decisions.winner.initLastName), " ", _react.default.createElement("span", {
+      }, "W: ", game.decisions.winner.initLastName), " ", _react.default.createElement("span", {
         className: "loser"
-      }, "L: ", this.props.game.decisions.loser.initLastName), " ", this.props.game.decisions.save ? _react.default.createElement("span", {
+      }, "L: ", game.decisions.loser.initLastName), " ", game.decisions.save ? _react.default.createElement("span", {
         className: "save"
-      }, "S: ", this.props.game.decisions.save.initLastName) : null) : // list probable pitchers if game has not yet begun
+      }, "S: ", game.decisions.save.initLastName) : null) : // list probable pitchers if game has not yet begun
       _react.default.createElement("span", {
         className: "roundProbablePitchers"
-      }, "A: ", this.props.game.teams.away.probablePitcher.initLastName, " H:", " ", this.props.game.teams.home.probablePitcher.initLastName), _react.default.createElement("span", {
+      }, "A: ", game.teams.away.probablePitcher.initLastName, " H:", " ", game.teams.home.probablePitcher.initLastName), _react.default.createElement("span", {
         className: "roundWrap"
       }, _react.default.createElement("a", {
-        href: "https://www.mlb.com/gameday/".concat(this.props.game.gamePk, "/final/wrap")
+        href: "https://www.mlb.com/gameday/".concat(game.gamePk, "/final/wrap")
       }, "Wrap"), " ", _react.default.createElement("a", {
-        href: "https://www.mlb.com/gameday/".concat(this.props.game.gamePk, "/final/video")
-      }, "Video"))));
+        href: "https://www.mlb.com/gameday/".concat(game.gamePk, "/final/video")
+      }, _react.default.createElement("img", {
+        src: "http://mlb.mlb.com/images/icons/mlb_tv.gif",
+        alt: "tv"
+      })))));
     }
   }]);
 
@@ -32562,10 +32612,10 @@ function (_React$Component) {
         console.log("state: ", this.state.dates);
         return _react.default.createElement("div", null, _react.default.createElement("span", {
           className: "options"
-        }, _react.default.createElement("span", {
+        }, _react.default.createElement("button", {
           className: "optionLeft",
           id: "selected"
-        }, "By Date"), _react.default.createElement("span", {
+        }, "By Date"), _react.default.createElement("button", {
           className: "optionRight",
           id: "unselected",
           onClick: this.getGamesByRound
@@ -32577,11 +32627,11 @@ function (_React$Component) {
       } else if (this.state.view === "byRound") {
         return _react.default.createElement("div", null, _react.default.createElement("span", {
           className: "options"
-        }, _react.default.createElement("span", {
+        }, _react.default.createElement("button", {
           className: "optionLeft",
           id: "unselected",
           onClick: this.getGamesByDate
-        }, "By Date"), _react.default.createElement("span", {
+        }, "By Date"), _react.default.createElement("button", {
           className: "optionRight",
           id: "selected"
         }, "By Round")), _react.default.createElement(_Schedule.default, {
@@ -32595,9 +32645,11 @@ function (_React$Component) {
     value: function render() {
       return _react.default.createElement("div", null, _react.default.createElement("span", {
         className: "app"
+      }, _react.default.createElement("div", {
+        className: "heading-bar"
       }, _react.default.createElement("span", {
         className: "heading"
-      }, _react.default.createElement("h2", null, "Schedule")), _react.default.createElement("br", null), this.renderView()));
+      }, "Schedule")), _react.default.createElement("br", null), this.renderView()));
     }
   }]);
 
@@ -32633,7 +32685,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54170" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65333" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -4,8 +4,11 @@ body {
 }
 
 .heading {
+  font: "Helvetica Neue";
+  width: auto;
   display: flex;
   justify-content: center;
+  font-size: 1.625625rem;
 }
 
 h3 {
@@ -36,28 +39,28 @@ h3 {
 }
 
 .gameDetails {
+  /* padding: 10px 0 10px 0; */
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 2fr 1fr;
+  grid-template-columns: 1fr 1fr 0.5fr 0.5fr 2fr 1.5fr;
   grid-column-gap: 10px;
   grid-template-rows: auto;
-  grid-template-areas: "score status broadcast decision recap";
-  align-items: stretch;
+  grid-template-areas: "away home status broadcast decision recap";
+  align-items: center;
   margin-bottom: 10px;
-}
-
-.score {
-  grid-area: score;
 }
 
 .gameState {
   grid-area: status;
+  place-self: center;
 }
 
 .broadcast {
   grid-area: broadcast;
+  place-self: center;
 }
 
 .decision {
+  place-self: left;
   grid-area: decision;
   display: flex;
   flex-wrap: wrap;
@@ -113,9 +116,17 @@ h3 {
   flex-wrap: nowrap;
 }
 
-.wrap {
+.recap {
   grid-area: recap;
 }
+
+/* .wrap {
+  padding: 10px;
+}
+
+.video {
+  padding: 10px;
+} */
 
 .date {
   grid-area: date;
@@ -130,22 +141,182 @@ h3 {
   justify-content: center;
 }
 
+button {
+  font-size: 16px;
+  color: #606060;
+  text-shadow: #d2d2d2;
+}
+
 .optionLeft {
-  padding: 10px;
+  padding: 15px;
   border-radius: 3px 0 0 3px;
   border-style: solid;
-  border-color: black;
+  border-color: #d2d2d2;
   border-width: 1px;
   align-content: center;
 }
+
 .optionRight {
-  padding: 10px;
+  padding: 15px;
   border-radius: 0 3px 3px 0;
   border-style: solid;
-  border-color: black;
+  border-color: #d2d2d2;
   border-width: 1px;
   align-content: center;
 }
+
 #selected {
   background: whitesmoke;
+}
+
+#selected:hover {
+  background: silver;
+}
+
+.optionLeft:hover {
+  background-color: silver;
+}
+
+.optionRight:hover {
+  background-color: silver;
+}
+
+img {
+  padding-right: 5px;
+}
+
+.awayTeam {
+  grid-area: away;
+}
+
+.homeTeam {
+  grid-area: home;
+}
+
+@media (max-width: 1152px) {
+  /* body {
+    font-size: 15px;
+  } */
+
+  .gameDetails {
+    /* padding: 10px 0 10px 0; */
+    display: grid;
+    grid-template-columns: 0.75fr 0.75fr 0.5fr 0.5fr 1fr 1fr;
+    grid-column-gap: 10px;
+    grid-template-rows: auto;
+    grid-template-areas: "away home status broadcast decision recap";
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  .decision {
+    place-self: center;
+    display: block;
+  }
+  .winner {
+    display: block;
+    clear: left;
+    clear: right;
+  }
+  .loser {
+    display: block;
+    clear: left;
+    clear: right;
+  }
+  .save {
+    display: block;
+    clear: left;
+    clear: right;
+  }
+
+  .recap {
+    display: block;
+  }
+  .video {
+    display: block;
+  }
+  .wrap {
+    display: block;
+  }
+}
+
+@media (max-width: 931px) {
+  .gameDetails {
+    display: grid;
+    grid-template-columns: 0.75fr 0.75fr 0.25fr 0.25fr 1fr 0.75fr;
+    grid-column-gap: 10px;
+    grid-template-rows: auto;
+    grid-template-areas: "away home status broadcast decision recap";
+    align-items: center;
+    margin-bottom: 10px;
+  }
+}
+
+/* @media (max-width: 908px) {
+  .gameDetails {
+    display: grid;
+    grid-template-columns: 1fr 1fr 0.5fr 0.5fr 1fr 1fr;
+    grid-column-gap: 10px;
+    grid-template-rows: auto;
+    grid-template-areas: "away home status broadcast decision recap";
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  .recap {
+    display: block;
+  }
+  .video {
+    display: block;
+  }
+  .wrap {
+    display: block;
+  }
+} */
+
+/* @media (max-width: 870px) {
+  body {
+    font-size: 14px;
+  }
+} */
+
+@media (max-width: 784px) {
+  body {
+    font-size: 15px;
+  }
+  .gameDetails {
+    display: grid;
+    grid-template-columns: 1fr 0.5fr 0.5fr 1.5fr 0.5fr;
+    grid-column-gap: 0;
+    grid-template-rows: auto;
+    grid-template-areas: "score status broadcast decision recap";
+  }
+
+  /* .recap {
+    display: block;
+  }
+  .video {
+    display: block;
+
+  }
+  .wrap {
+    display: block;
+
+  } */
+
+  .score {
+    grid-area: score;
+  }
+}
+
+/* @media (max-width: 727px) {
+  body {
+    font-size: 13px;
+  }
+} */
+
+@media (max-width: 499px) {
+  body {
+    font-size: 13px;
+  }
 }

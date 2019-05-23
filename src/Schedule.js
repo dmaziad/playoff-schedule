@@ -7,10 +7,6 @@ class Schedule extends React.Component {
     super(props);
   }
 
-  componentDidMount() {
-    console.log("schedule mounting with props: ", this.props);
-  }
-
   render() {
     return (
       <div className="schedule">
@@ -25,7 +21,7 @@ class Schedule extends React.Component {
               );
             })
           : this.props.rounds.map(round => {
-              return <Rounds round={round} />;
+              return <Rounds key={round.series.id} round={round} />;
             })}
       </div>
     );

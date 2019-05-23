@@ -15,12 +15,9 @@ class GameByRound extends React.Component {
     this.setState({ broadcast: broadcast });
   }
 
-  componentDidMount() {
-    console.log("mouting with props: ", this.props.game);
-  }
+  componentDidMount() {}
 
   render() {
-    // return <div>Hello</div>;
     return (
       <div className="game">
         <div className="result">

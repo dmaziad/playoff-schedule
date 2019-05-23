@@ -6,13 +6,10 @@ class GameDate extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      date: moment(this.props.date).format("ll")
+      date: moment(this.props.date).format("dddd, MMMM D")
     };
   }
 
-  componentDidMount() {
-    console.log("GameDate props: ", this.props);
-  }
   render() {
     return (
       <div className="date" key={this.props.date}>

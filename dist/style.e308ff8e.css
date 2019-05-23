@@ -1,6 +1,11 @@
 body {
-  font: 12px arial, helvetica, sans-serif;
+  font: 16px arial, helvetica, sans-serif;
   min-width: 100% !important;
+}
+
+h1 {
+  display: flex;
+  justify-content: center;
 }
 
 h3 {
@@ -24,6 +29,8 @@ h3 {
 }
 
 .result {
+  font-size: 12px;
+  color: gray;
   margin-top: 10px;
   clear: right;
 }
@@ -33,7 +40,7 @@ h3 {
   grid-template-columns: 2fr 1fr 1fr 2fr 1fr;
   grid-column-gap: 10px;
   grid-template-rows: auto;
-  grid-template-areas: "score status broadcast decision content";
+  grid-template-areas: "score status broadcast decision recap";
   align-items: stretch;
   margin-bottom: 10px;
 }
@@ -58,10 +65,10 @@ h3 {
 
 .roundGameDetails {
   display: grid;
-  grid-template-columns: 1fr 2fr 1fr 1fr 2fr 1fr;
+  grid-template-columns: 0.5fr 1.5fr 1fr 1fr 2fr 1fr;
   grid-column-gap: 10px;
   grid-template-rows: auto;
-  grid-template-areas: "date score status broadcast decision content";
+  grid-template-areas: "date score status broadcast decision recap";
   align-items: stretch;
   margin-bottom: 10px;
 }
@@ -88,16 +95,26 @@ h3 {
   flex-wrap: wrap;
 }
 
+.winner {
+  margin-left: 5px;
+  margin-right: 5px;
+  flex-wrap: nowrap;
+}
+
 .loser {
+  margin-left: 5px;
+  margin-right: 5px;
   flex-wrap: nowrap;
 }
 
 .save {
+  margin-left: 5px;
+  margin-right: 5px;
   flex-wrap: nowrap;
 }
 
 .wrap {
-  grid-area: content;
+  grid-area: recap;
 }
 
 .date {
@@ -130,7 +147,7 @@ h3 {
   align-content: center;
 }
 #selected {
-  background: lightgray;
+  background: gainsboro;
 }
 
 

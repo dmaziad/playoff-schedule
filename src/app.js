@@ -9,6 +9,8 @@ class App extends React.Component {
     this.state = {
       view: "loading"
     };
+    this.getGamesByDate = this.getGamesByDate.bind(this);
+    this.getGamesByRound = this.getGamesByRound.bind(this);
   }
 
   getGamesByDate() {
@@ -65,15 +67,11 @@ class App extends React.Component {
           "NLCS",
           "World Series"
         ];
-        console.log(response.data.series);
         for (let i = 0; i < response.data.series.length; i++) {
           let round = response.data.series[i];
           let seriesName = round.games[0].seriesStatus.shortName;
           let index = seriesList.indexOf(seriesName);
-          console.log("index: ", index);
           seriesList.splice(index, 1, round);
-          console.log("series: ", round);
-          console.log("seriesList: ", seriesList);
         }
         this.setState({ rounds: seriesList, view: "byRound" }, () => {
           console.log("state: ", this.state);
@@ -92,7 +90,11 @@ class App extends React.Component {
             <span className="optionLeft" id="selected">
               By Date
             </span>
-            <span className="optionRight" id="unselected">
+            <span
+              className="optionRight"
+              id="unselected"
+              onClick={this.getGamesByRound}
+            >
               By Round
             </span>
           </span>
@@ -107,7 +109,11 @@ class App extends React.Component {
       return (
         <div>
           <span className="options">
-            <span className="optionLeft" id="unselected">
+            <span
+              className="optionLeft"
+              id="unselected"
+              onClick={this.getGamesByDate}
+            >
               By Date
             </span>
             <span className="optionRight" id="selected">
@@ -122,14 +128,16 @@ class App extends React.Component {
 
   componentDidMount() {
     // default view should display schedule by date
-    this.getGamesByRound();
+    this.getGamesByDate();
   }
 
   render() {
     return (
       <div>
         <span className="app">
-          <h1>Schedule</h1>
+          <span className="heading">
+            <h2>Schedule</h2>
+          </span>
           <br />
           {this.renderView()}
         </span>

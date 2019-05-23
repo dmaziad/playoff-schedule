@@ -32062,8 +32062,8 @@ function (_React$Component) {
   }, {
     key: "componentDidMount",
     value: function componentDidMount() {
+      console.log(this.props.game.teams.away);
       this.getBroadcast();
-      console.log("Game props: ", this.props.game);
     }
   }, {
     key: "render",
@@ -32076,7 +32076,15 @@ function (_React$Component) {
         className: "gameDetails"
       }, _react.default.createElement("span", {
         className: "score"
-      }, this.props.game.teams.away.team.shortName, " ", this.props.game.linescore.teams.away.runs, " @", " ", this.props.game.teams.home.team.shortName, " ", this.props.game.linescore.teams.home.runs), this.props.game.status.detailedState === "Final" ? _react.default.createElement("span", {
+      }, _react.default.createElement("img", {
+        src: "https://www.mlbstatic.com/team-logos/".concat(this.props.game.teams.away.team.id, ".svg"),
+        height: "15",
+        width: "15"
+      }), this.props.game.teams.away.team.shortName, " ", this.props.game.linescore.teams.away.runs, " @", " ", _react.default.createElement("img", {
+        src: "https://www.mlbstatic.com/team-logos/".concat(this.props.game.teams.home.team.id, ".svg"),
+        height: "15",
+        width: "15"
+      }), this.props.game.teams.home.team.shortName, " ", this.props.game.linescore.teams.home.runs), this.props.game.status.detailedState === "Final" ? _react.default.createElement("span", {
         className: "gameState"
       }, "FINAL") : _react.default.createElement("span", {
         className: "gameState"
@@ -32100,7 +32108,10 @@ function (_React$Component) {
         href: "https://www.mlb.com/gameday/".concat(this.props.game.gamePk, "/final/wrap")
       }, "Wrap"), " ", _react.default.createElement("a", {
         href: "https://www.mlb.com/gameday/".concat(this.props.game.gamePk, "/final/video")
-      }, "Video"))));
+      }, _react.default.createElement("img", {
+        src: "http://mlb.mlb.com/images/icons/mlb_tv.gif",
+        alt: "tv"
+      })))));
     }
   }]);
 
@@ -32155,17 +32166,12 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(GameDate).call(this, props));
     _this.state = {
-      date: (0, _moment.default)(_this.props.date).format("ll")
+      date: (0, _moment.default)(_this.props.date).format("dddd, MMMM D")
     };
     return _this;
   }
 
   _createClass(GameDate, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      console.log("GameDate props: ", this.props);
-    }
-  }, {
     key: "render",
     value: function render() {
       return _react.default.createElement("div", {
@@ -32252,13 +32258,10 @@ function (_React$Component) {
     }
   }, {
     key: "componentDidMount",
-    value: function componentDidMount() {
-      console.log("mouting with props: ", this.props.game);
-    }
+    value: function componentDidMount() {}
   }, {
     key: "render",
     value: function render() {
-      // return <div>Hello</div>;
       return _react.default.createElement("div", {
         className: "game"
       }, _react.default.createElement("div", {
@@ -32413,11 +32416,6 @@ function (_React$Component) {
   }
 
   _createClass(Schedule, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      console.log("schedule mounting with props: ", this.props);
-    }
-  }, {
     key: "render",
     value: function render() {
       var _this = this;
@@ -32432,6 +32430,7 @@ function (_React$Component) {
         });
       }) : this.props.rounds.map(function (round) {
         return _react.default.createElement(_Rounds.default, {
+          key: round.series.id,
           round: round
         });
       }));
@@ -32466,9 +32465,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
@@ -32488,6 +32487,8 @@ function (_React$Component) {
     _this.state = {
       view: "loading"
     };
+    _this.getGamesByDate = _this.getGamesByDate.bind(_assertThisInitialized(_this));
+    _this.getGamesByRound = _this.getGamesByRound.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -32542,16 +32543,12 @@ function (_React$Component) {
       _axios.default.get("http://statsapi.mlb.com/api/v1/schedule/postseason/series?sportId=1&season=2018&hydrate=team,broadcasts(all),seriesStatus(useOverride=true),decisions,person,probablePitcher,linescore(matchup)").then(function (response) {
         var rounds = [];
         var seriesList = ["NL Tiebreaker", "AL Wild Card", "NL Wild Card", "ALDS", "ALDS", "NLDS", "NLDS", "ALCS", "NLCS", "World Series"];
-        console.log(response.data.series);
 
         for (var i = 0; i < response.data.series.length; i++) {
           var round = response.data.series[i];
           var seriesName = round.games[0].seriesStatus.shortName;
           var index = seriesList.indexOf(seriesName);
-          console.log("index: ", index);
           seriesList.splice(index, 1, round);
-          console.log("series: ", round);
-          console.log("seriesList: ", seriesList);
         }
 
         _this3.setState({
@@ -32576,7 +32573,8 @@ function (_React$Component) {
           id: "selected"
         }, "By Date"), _react.default.createElement("span", {
           className: "optionRight",
-          id: "unselected"
+          id: "unselected",
+          onClick: this.getGamesByRound
         }, "By Round")), _react.default.createElement(_Schedule.default, {
           dates: this.state.dates,
           games: this.state.games,
@@ -32587,7 +32585,8 @@ function (_React$Component) {
           className: "options"
         }, _react.default.createElement("span", {
           className: "optionLeft",
-          id: "unselected"
+          id: "unselected",
+          onClick: this.getGamesByDate
         }, "By Date"), _react.default.createElement("span", {
           className: "optionRight",
           id: "selected"
@@ -32601,14 +32600,16 @@ function (_React$Component) {
     key: "componentDidMount",
     value: function componentDidMount() {
       // default view should display schedule by date
-      this.getGamesByRound();
+      this.getGamesByDate();
     }
   }, {
     key: "render",
     value: function render() {
       return _react.default.createElement("div", null, _react.default.createElement("span", {
         className: "app"
-      }, _react.default.createElement("h1", null, "Schedule"), _react.default.createElement("br", null), this.renderView()));
+      }, _react.default.createElement("span", {
+        className: "heading"
+      }, _react.default.createElement("h2", null, "Schedule")), _react.default.createElement("br", null), this.renderView()));
     }
   }]);
 

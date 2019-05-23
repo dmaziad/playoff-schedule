@@ -15,8 +15,8 @@ class GameByDate extends React.Component {
   }
 
   componentDidMount() {
+    console.log(this.props.game.teams.away);
     this.getBroadcast();
-    console.log("Game props: ", this.props.game);
   }
 
   render() {
@@ -32,8 +32,22 @@ class GameByDate extends React.Component {
         </div>
         <div className="gameDetails">
           <span className="score">
+            <img
+              src={`https://www.mlbstatic.com/team-logos/${
+                this.props.game.teams.away.team.id
+              }.svg`}
+              height="15"
+              width="15"
+            />
             {this.props.game.teams.away.team.shortName}{" "}
             {this.props.game.linescore.teams.away.runs} @{" "}
+            <img
+              src={`https://www.mlbstatic.com/team-logos/${
+                this.props.game.teams.home.team.id
+              }.svg`}
+              height="15"
+              width="15"
+            />
             {this.props.game.teams.home.team.shortName}{" "}
             {this.props.game.linescore.teams.home.runs}
           </span>
@@ -83,7 +97,7 @@ class GameByDate extends React.Component {
                 this.props.game.gamePk
               }/final/video`}
             >
-              Video
+              <img src="http://mlb.mlb.com/images/icons/mlb_tv.gif" alt="tv" />
             </a>
           </span>
         </div>

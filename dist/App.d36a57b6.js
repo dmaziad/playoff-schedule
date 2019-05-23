@@ -35334,70 +35334,35 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/classCallCheck"));
-
-var _createClass2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/createClass"));
-
-var _possibleConstructorReturn2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/possibleConstructorReturn"));
-
-var _getPrototypeOf2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/getPrototypeOf"));
-
-var _inherits2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/inherits"));
-
 var _react = _interopRequireDefault(require("react"));
 
 var _GameByRound = _interopRequireDefault(require("./GameByRound"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var Rounds =
-/*#__PURE__*/
-function (_React$Component) {
-  (0, _inherits2.default)(Rounds, _React$Component);
-
-  function Rounds(props) {
-    (0, _classCallCheck2.default)(this, Rounds);
-    return (0, _possibleConstructorReturn2.default)(this, (0, _getPrototypeOf2.default)(Rounds).call(this, props));
-  }
-
-  (0, _createClass2.default)(Rounds, [{
-    key: "render",
-    value: function render() {
-      return _react.default.createElement("div", {
-        className: "round",
-        key: this.props.round.games[0].seriesStatus.shortName
-      }, _react.default.createElement("h3", null, this.props.round.games[0].seriesStatus.shortName), this.props.round.games.length > 1 ? this.props.round.games.map(function (game) {
-        return _react.default.createElement(_GameByRound.default, {
-          game: game,
-          key: game.gamePk
-        });
-      }) : _react.default.createElement(_GameByRound.default, {
-        game: this.props.round.games[0]
-      }));
-    }
-  }]);
-  return Rounds;
-}(_react.default.Component);
+var Rounds = function Rounds(props) {
+  return _react.default.createElement("div", {
+    className: "round",
+    key: props.round.games[0].seriesStatus.shortName
+  }, _react.default.createElement("h3", null, props.round.games[0].seriesStatus.shortName), props.round.games.length > 1 ? props.round.games.map(function (game) {
+    return _react.default.createElement(_GameByRound.default, {
+      game: game,
+      key: game.gamePk
+    });
+  }) : _react.default.createElement(_GameByRound.default, {
+    game: props.round.games[0]
+  }));
+};
 
 var _default = Rounds;
 exports.default = _default;
-},{"@babel/runtime-corejs2/helpers/classCallCheck":"../node_modules/@babel/runtime-corejs2/helpers/classCallCheck.js","@babel/runtime-corejs2/helpers/createClass":"../node_modules/@babel/runtime-corejs2/helpers/createClass.js","@babel/runtime-corejs2/helpers/possibleConstructorReturn":"../node_modules/@babel/runtime-corejs2/helpers/possibleConstructorReturn.js","@babel/runtime-corejs2/helpers/getPrototypeOf":"../node_modules/@babel/runtime-corejs2/helpers/getPrototypeOf.js","@babel/runtime-corejs2/helpers/inherits":"../node_modules/@babel/runtime-corejs2/helpers/inherits.js","react":"../node_modules/react/index.js","./GameByRound":"GameByRound.js"}],"Schedule.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","./GameByRound":"GameByRound.js"}],"Schedule.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
-
-var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/classCallCheck"));
-
-var _createClass2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/createClass"));
-
-var _possibleConstructorReturn2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/possibleConstructorReturn"));
-
-var _getPrototypeOf2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/getPrototypeOf"));
-
-var _inherits2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/inherits"));
 
 var _react = _interopRequireDefault(require("react"));
 
@@ -35407,43 +35372,26 @@ var _Rounds = _interopRequireDefault(require("./Rounds"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var Schedule =
-/*#__PURE__*/
-function (_React$Component) {
-  (0, _inherits2.default)(Schedule, _React$Component);
-
-  function Schedule(props) {
-    (0, _classCallCheck2.default)(this, Schedule);
-    return (0, _possibleConstructorReturn2.default)(this, (0, _getPrototypeOf2.default)(Schedule).call(this, props));
-  }
-
-  (0, _createClass2.default)(Schedule, [{
-    key: "render",
-    value: function render() {
-      var _this = this;
-
-      return _react.default.createElement("div", {
-        className: "schedule"
-      }, this.props.view === "byDate" ? this.props.dates.map(function (date) {
-        return _react.default.createElement(_GameDate.default, {
-          key: date,
-          date: date,
-          games: _this.props.games[date]
-        });
-      }) : this.props.rounds.map(function (round) {
-        return _react.default.createElement(_Rounds.default, {
-          key: round.series.id,
-          round: round
-        });
-      }));
-    }
-  }]);
-  return Schedule;
-}(_react.default.Component);
+var Schedule = function Schedule(props) {
+  return _react.default.createElement("div", {
+    className: "schedule"
+  }, props.view === "byDate" ? props.dates.map(function (date) {
+    return _react.default.createElement(_GameDate.default, {
+      key: date,
+      date: date,
+      games: props.games[date]
+    });
+  }) : props.rounds.map(function (round) {
+    return _react.default.createElement(_Rounds.default, {
+      key: round.series.id,
+      round: round
+    });
+  }));
+};
 
 var _default = Schedule;
 exports.default = _default;
-},{"@babel/runtime-corejs2/helpers/classCallCheck":"../node_modules/@babel/runtime-corejs2/helpers/classCallCheck.js","@babel/runtime-corejs2/helpers/createClass":"../node_modules/@babel/runtime-corejs2/helpers/createClass.js","@babel/runtime-corejs2/helpers/possibleConstructorReturn":"../node_modules/@babel/runtime-corejs2/helpers/possibleConstructorReturn.js","@babel/runtime-corejs2/helpers/getPrototypeOf":"../node_modules/@babel/runtime-corejs2/helpers/getPrototypeOf.js","@babel/runtime-corejs2/helpers/inherits":"../node_modules/@babel/runtime-corejs2/helpers/inherits.js","react":"../node_modules/react/index.js","./GameDate":"GameDate.js","./Rounds":"Rounds.js"}],"View.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","./GameDate":"GameDate.js","./Rounds":"Rounds.js"}],"View.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {

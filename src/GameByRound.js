@@ -4,8 +4,11 @@ import moment from "moment";
 class GameByRound extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { broadcast: { name: "MLB" } };
     this.getBroadcast = this.getBroadcast.bind(this);
+  }
+
+  componentDidMount() {
+    this.getBroadcast();
   }
 
   getBroadcast() {
@@ -14,8 +17,6 @@ class GameByRound extends React.Component {
     });
     this.setState({ broadcast: broadcast });
   }
-
-  componentDidMount() {}
 
   render() {
     return (
@@ -47,7 +48,9 @@ class GameByRound extends React.Component {
             </span>
           )}
           <span className="roundBroadcast">
-            {this.state.broadcast ? this.state.broadcast.name : null}
+            {this.state && this.state.broadcast
+              ? this.state.broadcast.name
+              : null}
           </span>
           {this.props.game.status.detailedState === "Final" ? (
             // list winning and losing pitcher if game status is final

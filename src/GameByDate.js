@@ -3,8 +3,11 @@ import React from "react";
 class GameByDate extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { broadcast: { name: "MLB" } };
     this.getBroadcast = this.getBroadcast.bind(this);
+  }
+
+  componentDidMount() {
+    this.getBroadcast();
   }
 
   getBroadcast() {
@@ -12,11 +15,6 @@ class GameByDate extends React.Component {
       return el.type === "TV";
     });
     this.setState({ broadcast: broadcast });
-  }
-
-  componentDidMount() {
-    console.log(this.props.game.teams.away);
-    this.getBroadcast();
   }
 
   render() {
@@ -60,7 +58,9 @@ class GameByDate extends React.Component {
             </span>
           )}
           <span className="broadcast">
-            {this.state.broadcast ? this.state.broadcast.name : null}
+            {this.state && this.state.broadcast
+              ? this.state.broadcast.name
+              : null}
           </span>
           {this.props.game.status.detailedState === "Final" ? (
             // list winning and losing pitcher if game status is final

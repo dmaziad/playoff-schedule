@@ -3,7 +3,7 @@ body {
   min-width: 100% !important;
 }
 
-h1 {
+.heading {
   display: flex;
   justify-content: center;
 }
@@ -147,5 +147,5 @@ h3 {
   align-content: center;
 }
 #selected {
-  background: gainsboro;
+  background: whitesmoke;
 }

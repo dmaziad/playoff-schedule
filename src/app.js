@@ -6,11 +6,13 @@ import Schedule from "./Schedule.js";
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      view: "loading"
-    };
     this.getGamesByDate = this.getGamesByDate.bind(this);
     this.getGamesByRound = this.getGamesByRound.bind(this);
+  }
+
+  componentDidMount() {
+    // default view should display schedule by date
+    this.getGamesByDate();
   }
 
   getGamesByDate() {
@@ -80,7 +82,7 @@ class App extends React.Component {
   }
 
   renderView() {
-    if (!this.state.view) {
+    if (!this.state || !this.state.view) {
       return <div>loading...</div>;
     } else if (this.state.view === "byDate") {
       console.log("state: ", this.state.dates);
@@ -124,11 +126,6 @@ class App extends React.Component {
         </div>
       );
     }
-  }
-
-  componentDidMount() {
-    // default view should display schedule by date
-    this.getGamesByDate();
   }
 
   render() {

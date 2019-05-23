@@ -32433,7 +32433,7 @@ function (_React$Component) {
 
 var _default = Schedule;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","./GameDate":"GameDate.js","./Rounds":"Rounds.js"}],"app.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","./GameDate":"GameDate.js","./Rounds":"Rounds.js"}],"App.js":[function(require,module,exports) {
 "use strict";
 
 var _react = _interopRequireDefault(require("react"));
@@ -32475,15 +32475,18 @@ function (_React$Component) {
     _classCallCheck(this, App);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(App).call(this, props));
-    _this.state = {
-      view: "loading"
-    };
     _this.getGamesByDate = _this.getGamesByDate.bind(_assertThisInitialized(_this));
     _this.getGamesByRound = _this.getGamesByRound.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(App, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      // default view should display schedule by date
+      this.getGamesByDate();
+    }
+  }, {
     key: "getGamesByDate",
     value: function getGamesByDate() {
       var _this2 = this;
@@ -32553,7 +32556,7 @@ function (_React$Component) {
   }, {
     key: "renderView",
     value: function renderView() {
-      if (!this.state.view) {
+      if (!this.state || !this.state.view) {
         return _react.default.createElement("div", null, "loading...");
       } else if (this.state.view === "byDate") {
         console.log("state: ", this.state.dates);
@@ -32586,12 +32589,6 @@ function (_React$Component) {
           view: this.state.view
         }));
       }
-    }
-  }, {
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      // default view should display schedule by date
-      this.getGamesByDate();
     }
   }, {
     key: "render",
@@ -32811,5 +32808,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../node_modules/parcel-bundler/src/builtins/hmr-runtime.js","app.js"], null)
-//# sourceMappingURL=/app.c328ef1a.js.map
+},{}]},{},["../node_modules/parcel-bundler/src/builtins/hmr-runtime.js","App.js"], null)
+//# sourceMappingURL=/App.d36a57b6.js.map

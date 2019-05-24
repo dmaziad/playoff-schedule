@@ -35122,7 +35122,7 @@ var global = arguments[3];
 
 })));
 
-},{}],"GameByDate.js":[function(require,module,exports) {
+},{}],"Game.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -35233,7 +35233,7 @@ var _react = _interopRequireDefault(require("react"));
 
 var _moment = _interopRequireDefault(require("moment"));
 
-var _GameByDate = _interopRequireDefault(require("./GameByDate"));
+var _Game = _interopRequireDefault(require("./Game"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -35246,7 +35246,7 @@ var GameDate = function GameDate(_ref) {
     className: "date",
     key: date
   }, _react.default.createElement("h2", null, (0, _moment.default)(date).format("dddd, MMMM D")), games.map(function (game) {
-    return _react.default.createElement(_GameByDate.default, {
+    return _react.default.createElement(_Game.default, {
       date: date,
       view: view,
       game: game,
@@ -35258,7 +35258,7 @@ var GameDate = function GameDate(_ref) {
 
 var _default = GameDate;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","moment":"../node_modules/moment/moment.js","./GameByDate":"GameByDate.js"}],"../node_modules/os-browserify/browser.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","moment":"../node_modules/moment/moment.js","./Game":"Game.js"}],"../node_modules/os-browserify/browser.js":[function(require,module,exports) {
 exports.endianness = function () { return 'LE' };
 
 exports.hostname = function () {
@@ -35366,11 +35366,10 @@ var _react = _interopRequireDefault(require("react"));
 
 var _uniqid = _interopRequireDefault(require("uniqid"));
 
-var _GameByDate = _interopRequireDefault(require("./GameByDate"));
+var _Game = _interopRequireDefault(require("./Game"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// import GameByRound from "./GameByRound";
 var Rounds = function Rounds(_ref) {
   var round = _ref.round,
       width = _ref.width,
@@ -35379,7 +35378,7 @@ var Rounds = function Rounds(_ref) {
     className: "round",
     key: (0, _uniqid.default)('round-')
   }, _react.default.createElement("h2", null, round.seriesName), round.games.map(function (game) {
-    return _react.default.createElement(_GameByDate.default, {
+    return _react.default.createElement(_Game.default, {
       game: game,
       date: game.gameDate,
       view: view,
@@ -35391,7 +35390,7 @@ var Rounds = function Rounds(_ref) {
 
 var _default = Rounds;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","uniqid":"../node_modules/uniqid/index.js","./GameByDate":"GameByDate.js"}],"Schedule.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","uniqid":"../node_modules/uniqid/index.js","./Game":"Game.js"}],"Schedule.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -35620,7 +35619,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64733" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49415" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

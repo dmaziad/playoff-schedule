@@ -1,13 +1,12 @@
 import React from "react";
-// import GameByRound from "./GameByRound";
 import uniqid from "uniqid";
-import GameByDate from './GameByDate'
+import Game from './Game'
 
 const Rounds = ({ round, width, view }) => (
   <div className="round" key={uniqid('round-')}>
     <h2>{round.seriesName}</h2>
     {round.games.map(game => {
-      return <GameByDate game={game} date={game.gameDate} view={view} key={game.gamePk} width={width} />;
+      return <Game game={game} date={game.gameDate} view={view} key={game.gamePk} width={width} />;
     })}
   </div>
 );

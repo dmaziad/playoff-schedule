@@ -54,7 +54,7 @@ h3 {
   margin-left: 5px;
 }
 
-.result {
+.game-header {
   font-size: 12px;
   color: gray;
   margin-top: 10px;
@@ -62,7 +62,6 @@ h3 {
 }
 
 .gameDetails {
-  /* padding: 10px 0 10px 0; */
   display: grid;
   grid-template-columns: 1fr 1fr 0.5fr 0.5fr 2fr 1.5fr;
   grid-column-gap: 10px;
@@ -86,6 +85,9 @@ h3 {
   margin-right: 4px;
   position: relative;
   top: 0;
+}
+.fox {
+  max-width: 30px;
 }
 
 .decision {
@@ -161,6 +163,7 @@ h3 {
 
 .recap {
   grid-area: recap;
+  align-self: start;
 }
 
 .date {
@@ -226,7 +229,7 @@ button {
 }
 
 img {
-  margin-right: 4px;
+  margin-right: 5px;
   position: relative;
   top: 6px;
 }

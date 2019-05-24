@@ -35150,7 +35150,7 @@ var GameByDate = function GameByDate(_ref) {
     className: "game"
   }, _react.default.createElement("div", {
     className: "game-header"
-  }, view === "byRound" ? (0, _moment.default)(game.gameDate).format('LL') + ' ' : description, "- ", game.seriesStatus.result), _react.default.createElement("div", {
+  }, view === "byRound" ? _react.default.createElement("strong", null, (0, _moment.default)(game.gameDate).format('LL') + ' ') : description, "- ", game.seriesStatus.result), _react.default.createElement("div", {
     className: "gameDetails"
   }, width > 784 ? _react.default.createElement("span", {
     className: "awayTeam"
@@ -35164,7 +35164,7 @@ var GameByDate = function GameByDate(_ref) {
     className: "score"
   }, _react.default.createElement("a", {
     href: "https://www.mlb.com/".concat(awayTeam.team.teamName.replace(/\s/g, "").toLowerCase())
-  }, awayTeam.team.abbreviation, " ", game.linescore.teams.away.runs), " ", width < 500 ? _react.default.createElement("br", null) : null, "@", " ", _react.default.createElement("a", {
+  }, awayTeam.team.abbreviation, " ", game.linescore.teams.away.runs), " ", width < 500 ? _react.default.createElement("br", null) : ' @ ', _react.default.createElement("a", {
     href: "https://www.mlb.com/".concat(homeTeam.team.teamName.replace(/\s/g, "").toLowerCase())
   }, homeTeam.team.abbreviation, " ", game.linescore.teams.home.runs)), width > 784 ? _react.default.createElement("span", {
     className: "homeTeam"
@@ -35619,7 +35619,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49415" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55988" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

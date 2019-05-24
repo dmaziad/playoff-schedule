@@ -96,52 +96,6 @@ h3 {
   flex-wrap: wrap;
 }
 
-.roundGameDetails {
-  display: grid;
-  grid-template-columns: 0.25fr 0.75 0.75fr 0.5fr 0.5fr 1fr 1fr;
-  grid-column-gap: 10px;
-  grid-template-rows: auto;
-  grid-template-areas: "date away home status broadcast decision recap";
-  align-items: center;
-  margin-bottom: 10px;
-}
-
-.roundDate {
-  grid-area: date;
-}
-
-.roundScore {
-  grid-area: score;
-}
-
-.roundGameState {
-  grid-area: status;
-}
-
-.roundBroadcast {
-  grid-area: broadcast;
-}
-
-.roundDecision {
-  place-self: center;
-  display: block;
-}
-.roundWinner {
-  display: block;
-  clear: left;
-  clear: right;
-}
-.roundLoser {
-  display: block;
-  clear: left;
-  clear: right;
-}
-.roundSave {
-  display: block;
-  clear: left;
-  clear: right;
-}
-
 .winner {
   margin-left: 5px;
   margin-right: 5px;
@@ -166,14 +120,6 @@ h3 {
 }
 
 .date {
-  grid-area: date;
-  display: block;
-  min-width: 100%;
-  clear: left;
-  clear: right;
-}
-
-.roundDate {
   grid-area: date;
   display: block;
   min-width: 100%;
@@ -273,7 +219,6 @@ img {
     clear: left;
     clear: right;
   }
-
   .recap {
     display: block;
   }
@@ -281,21 +226,6 @@ img {
     display: block;
   }
   .wrap {
-    display: block;
-  }
-
-  .roundGameDetails {
-    display: grid;
-    grid-template-columns: 0.25fr 0.75 0.75fr 0.5fr 0.5fr 1fr 1fr;
-    grid-column-gap: 10px;
-    grid-template-rows: auto;
-    grid-template-areas: "date away home status broadcast decision recap";
-    align-items: center;
-    margin-bottom: 10px;
-  }
-
-  .roundDecision {
-    place-self: center;
     display: block;
   }
   .winner {
@@ -312,10 +242,6 @@ img {
     display: block;
     clear: left;
     clear: right;
-  }
-
-  .roundRecap {
-    display: block;
   }
 }
 
@@ -346,29 +272,10 @@ img {
   .score {
     grid-area: score;
   }
-  .roundGameDetails {
-    display: grid;
-    grid-template-columns: 0.75fr 1.5fr 0.75fr 0.75fr 1.5fr 0.75fr;
-    grid-column-gap: 0;
-    grid-template-rows: auto;
-    grid-template-areas: "date score status broadcast decision recap";
-  }
-
-  .roundScore {
-    grid-area: score;
-  }
 }
 
 @media (max-width: 499px) {
   body {
     font-size: 13px;
-  }
-
-  .roundGameDetails {
-    display: grid;
-    grid-template-columns: 0.5fr 0.75fr 0.5fr 0.5fr 1.5fr 0.3fr;
-    grid-column-gap: 0;
-    grid-template-rows: auto;
-    grid-template-areas: "date score status broadcast decision recap";
   }
 }

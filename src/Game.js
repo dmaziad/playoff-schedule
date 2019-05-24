@@ -15,7 +15,7 @@ const GameByDate = ({ game, width, view }) => {
     <div className="game">
       <div className="game-header">
         {view === "byRound" ?
-        moment(game.gameDate).format('LL')+ ' '
+       <strong>{moment(game.gameDate).format('LL')+' '}</strong>
         : description}
         - {game.seriesStatus.result}
       </div>
@@ -46,7 +46,7 @@ const GameByDate = ({ game, width, view }) => {
             >
               {awayTeam.team.abbreviation} {game.linescore.teams.away.runs}
             </a>{" "}
-            {width < 500 ? <br /> : null}@{" "}
+            {width < 500 ? <br /> : ' @ '}
             <a
               href={`https://www.mlb.com/${homeTeam.team.teamName
                 .replace(/\s/g, "")

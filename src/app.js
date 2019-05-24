@@ -36,7 +36,9 @@ class App extends React.Component {
       <div>
         <span className="app">
           <div className="heading-bar">
-            <span className="heading">Schedule</span>
+            <h2 className="title">
+              <span className="heading">Schedule</span>
+            </h2>
           </div>
           <br />
           {this.state ? (

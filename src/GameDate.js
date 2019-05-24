@@ -13,7 +13,7 @@ class GameDate extends React.Component {
   render() {
     return (
       <div className="date" key={this.props.date}>
-        <h3>{this.state.date}</h3>
+        <h2>{this.state.date}</h2>
         {this.props.games.length > 1 ? (
           this.props.games.map(game => {
             return <GameByDate game={game} key={game.gamePk} />;

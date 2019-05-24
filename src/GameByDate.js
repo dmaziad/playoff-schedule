@@ -13,6 +13,10 @@ class GameByDate extends React.Component {
     window.addEventListener("resize", this.getWidth);
   }
 
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.getWidth);
+  }
+
   getBroadcast() {
     const { game } = this.props;
     let broadcast = game.broadcasts.find(el => {
@@ -51,8 +55,8 @@ class GameByDate extends React.Component {
                   src={`https://www.mlbstatic.com/team-logos/${
                     awayTeam.team.id
                   }.svg`}
-                  height="20"
-                  width="20"
+                  height="25"
+                  width="25"
                 />
                 {awayTeam.team.shortName} {game.linescore.teams.away.runs}
               </a>
@@ -88,8 +92,8 @@ class GameByDate extends React.Component {
                   src={`https://www.mlbstatic.com/team-logos/${
                     homeTeam.team.id
                   }.svg`}
-                  height="20"
-                  width="20"
+                  height="25"
+                  width="25"
                 />
                 {homeTeam.team.shortName} {game.linescore.teams.home.runs}
               </a>
@@ -103,9 +107,14 @@ class GameByDate extends React.Component {
             </span>
           )}
           <span className="broadcast">
-            {this.state && this.state.broadcast
-              ? this.state.broadcast.name
-              : null}
+            {this.state && this.state.broadcast ? (
+              <img
+                src={`https://s3.us-east-2.amazonaws.com/dm-mlb-image-bucket/${this.state.broadcast.name
+                  .toLowerCase()
+                  .slice(0, 3)}.png`}
+                class="broadcast-image"
+              />
+            ) : null}
           </span>
           {game.status.detailedState === "Final" ? (
             // list winning and losing pitcher if game status is final
@@ -159,7 +168,8 @@ class GameByDate extends React.Component {
           <span className="recap">
             <span className="wrap">
               <a href={`https://www.mlb.com/gameday/${game.gamePk}/final/wrap`}>
-                Wrap
+                <img src="https://s3.us-east-2.amazonaws.com/dm-mlb-image-bucket/wrap.png" />
+                {this.state && this.state.width > 625 ? "Wrap" : null}
               </a>{" "}
             </span>
             <span className="video">

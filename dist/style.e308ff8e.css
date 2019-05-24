@@ -1,14 +1,35 @@
 body {
-  font: 16px arial, helvetica, sans-serif;
+  font-size: 16px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
   min-width: 100% !important;
 }
 
-.heading {
-  font: "Helvetica Neue";
-  width: auto;
-  display: flex;
-  justify-content: center;
-  font-size: 1.625625rem;
+a {
+  text-decoration: none;
+  color: #606060;
+}
+
+.decision span a {
+  color: #2e5892;
+}
+
+.roundDecision span a {
+  color: #2e5892;
+}
+
+h2.title {
+  width: 100%;
+  text-align: center;
+  border-bottom: 1px solid #d2d2d2;
+  line-height: 0.1em;
+  margin: 10px 0 20px;
+}
+
+h2 span {
+  background: #fff;
+  padding: 0 10px;
 }
 
 h3 {
@@ -23,6 +44,7 @@ h3 {
 }
 
 .game {
+  color: #606060;
   min-width: 100%;
   border-top-style: solid;
   border-top-color: silver;
@@ -59,6 +81,12 @@ h3 {
   place-self: center;
 }
 
+.broadcast-image {
+  margin-right: 4px;
+  position: relative;
+  top: 0;
+}
+
 .decision {
   place-self: left;
   grid-area: decision;
@@ -68,11 +96,11 @@ h3 {
 
 .roundGameDetails {
   display: grid;
-  grid-template-columns: 0.5fr 1.5fr 1fr 1fr 2fr 1fr;
+  grid-template-columns: 0.25fr 0.75 0.75fr 0.5fr 0.5fr 1fr 1fr;
   grid-column-gap: 10px;
   grid-template-rows: auto;
-  grid-template-areas: "date score status broadcast decision recap";
-  align-items: stretch;
+  grid-template-areas: "date away home status broadcast decision recap";
+  align-items: center;
   margin-bottom: 10px;
 }
 
@@ -93,9 +121,23 @@ h3 {
 }
 
 .roundDecision {
-  grid-area: decision;
-  display: flex;
-  flex-wrap: wrap;
+  place-self: center;
+  display: block;
+}
+.roundWinner {
+  display: block;
+  clear: left;
+  clear: right;
+}
+.roundLoser {
+  display: block;
+  clear: left;
+  clear: right;
+}
+.roundSave {
+  display: block;
+  clear: left;
+  clear: right;
 }
 
 .winner {
@@ -120,15 +162,15 @@ h3 {
   grid-area: recap;
 }
 
-/* .wrap {
-  padding: 10px;
+.date {
+  grid-area: date;
+  display: block;
+  min-width: 100%;
+  clear: left;
+  clear: right;
 }
 
-.video {
-  padding: 10px;
-} */
-
-.date {
+.roundDate {
   grid-area: date;
   display: block;
   min-width: 100%;
@@ -183,15 +225,19 @@ button {
 }
 
 img {
-  padding-right: 5px;
+  margin-right: 4px;
+  position: relative;
+  top: 6px;
 }
 
 .awayTeam {
   grid-area: away;
+  align-self: center;
 }
 
 .homeTeam {
   grid-area: home;
+  align-self: center;
 }
 
 @media (max-width: 1152px) {
@@ -234,6 +280,40 @@ img {
   .wrap {
     display: block;
   }
+
+  .roundGameDetails {
+    display: grid;
+    grid-template-columns: 0.25fr 0.75 0.75fr 0.5fr 0.5fr 1fr 1fr;
+    grid-column-gap: 10px;
+    grid-template-rows: auto;
+    grid-template-areas: "date away home status broadcast decision recap";
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  .roundDecision {
+    place-self: center;
+    display: block;
+  }
+  .winner {
+    display: block;
+    clear: left;
+    clear: right;
+  }
+  .loser {
+    display: block;
+    clear: left;
+    clear: right;
+  }
+  .save {
+    display: block;
+    clear: left;
+    clear: right;
+  }
+
+  .roundRecap {
+    display: block;
+  }
 }
 
 @media (max-width: 931px) {
@@ -260,19 +340,18 @@ img {
     grid-template-areas: "score status broadcast decision recap";
   }
 
-  /* .recap {
-    display: block;
-  }
-  .video {
-    display: block;
-
-  }
-  .wrap {
-    display: block;
-
-  } */
-
   .score {
+    grid-area: score;
+  }
+  .roundGameDetails {
+    display: grid;
+    grid-template-columns: 0.75fr 1.5fr 0.75fr 0.75fr 1.5fr 0.75fr;
+    grid-column-gap: 0;
+    grid-template-rows: auto;
+    grid-template-areas: "date score status broadcast decision recap";
+  }
+
+  .roundScore {
     grid-area: score;
   }
 }
@@ -280,6 +359,14 @@ img {
 @media (max-width: 499px) {
   body {
     font-size: 13px;
+  }
+
+  .roundGameDetails {
+    display: grid;
+    grid-template-columns: 0.5fr 0.75fr 0.5fr 0.5fr 1.5fr 0.3fr;
+    grid-column-gap: 0;
+    grid-template-rows: auto;
+    grid-template-areas: "date score status broadcast decision recap";
   }
 }
 

@@ -51,6 +51,7 @@ h3 {
   border-top-width: 0.1px;
   clear: left;
   clear: right;
+  margin-left: 5px;
 }
 
 .result {

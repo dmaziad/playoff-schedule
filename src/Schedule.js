@@ -1,66 +1,59 @@
-import React from "react";
-import GameDate from "./GameDate";
-import Rounds from "./Rounds";
-import uniqid from "uniqid";
+import React, { useState, useEffect } from 'react';
+import GameDate from './GameDate';
+import Rounds from './Rounds';
+import uniqid from 'uniqid';
 
-class Schedule extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      width: null
-    };
-    this.getWidth = this.getWidth.bind(this);
-  }
+const Schedule = ({ dates, rounds, view }) => {
+  let [width, setWidth] = useState(null);
 
-  componentDidMount() {
-    this.getWidth();
-    window.addEventListener("resize", this.getWidth);
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener("resize", this.getWidth);
-  }
-
-  getWidth() {
+  const getWidth = () => {
     let windowWidth = document.documentElement.clientWidth;
-    this.setState({ width: windowWidth });
-  }
+    setWidth(windowWidth);
+  };
 
-  render() {
-    const { dates, rounds, view } = this.props;
-    return (
-      <div className="schedule">
-        {view === "byDate"
-          ? dates.map(date => {
-              const games = rounds.reduce((acc, round) => {
-                const filteredGames = round.games.filter(game =>
-                  game.gameDate.includes(date)
-                );
-                return [...acc, ...filteredGames];
-              }, []);
-              return (
-                <GameDate
-                  key={date}
-                  date={date}
-                  games={games}
-                  view={view}
-                  width={this.state.width}
-                />
+  useEffect(() => {
+    function listenForWidth() {
+      getWidth();
+      window.addEventListener('resize', getWidth);
+    }
+
+    return function stopListener() {
+      window.removeEventListener('resize', getWidth);
+    };
+  });
+
+  return (
+    <div className="schedule">
+      {view === 'byDate'
+        ? dates.map(date => {
+            const games = rounds.reduce((acc, round) => {
+              const filteredGames = round.games.filter(game =>
+                game.gameDate.includes(date)
               );
-            })
-          : rounds.map(round => {
-              return (
-                <Rounds
-                  key={uniqid(`schedule-`)}
-                  view={view}
-                  round={round}
-                  width={this.state.width}
-                />
-              );
-            })}
-      </div>
-    );
-  }
-}
+              return [...acc, ...filteredGames];
+            }, []);
+            return (
+              <GameDate
+                key={date}
+                date={date}
+                games={games}
+                view={view}
+                width={width}
+              />
+            );
+          })
+        : rounds.map(round => {
+            return (
+              <Rounds
+                key={uniqid(`schedule-`)}
+                view={view}
+                round={round}
+                width={width}
+              />
+            );
+          })}
+    </div>
+  );
+};
 
 export default Schedule;

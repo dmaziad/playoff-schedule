@@ -12,10 +12,8 @@ const Schedule = ({ dates, rounds, view }) => {
   };
 
   useEffect(() => {
-    function listenForWidth() {
-      getWidth();
-      window.addEventListener('resize', getWidth);
-    }
+    getWidth();
+    window.addEventListener('resize', getWidth);
 
     return function stopListener() {
       window.removeEventListener('resize', getWidth);
